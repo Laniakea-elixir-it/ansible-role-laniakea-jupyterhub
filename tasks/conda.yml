@@ -18,7 +18,7 @@
 
 - name: Create conda file symlink
   file:
-    path: "{{ conda_dir }}/{{ conda_script_path }}"
+    path: "{{ conda_dir }}{{ conda_script_path }}"
     src: "{{ conda_script_path }}"
     state: link
 
