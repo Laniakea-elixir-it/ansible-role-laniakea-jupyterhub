@@ -1,0 +1,27 @@
+---
+
+- name: Install prerequisites
+  apt:
+    name:
+      - nodejs
+      - npm
+      - python3-pip
+      - python3-virtualenv
+    state: present
+    update_cache: yes
+
+- name: Install jupyterlab and jupyterhub using pip
+  pip:
+    name: 
+      - wheel=={{ wheel_version }}
+      - jupyterlab=={{jupyterlab_version}}
+      - jupyterhub=={{ jupyterhub_version }}
+      - notebook=={{ notebook_version }}
+      - markupsafe=={{ markupsafe_version }} # https://techoverflow.net/2022/04/07/how-to-fix-jupyter-lab-importerror-cannot-import-name-soft_unicode-from-markupsafe/
+      - ipywidgets=={{ ipywidgets_version }}
+    virtualenv: "{{ jupyterhub_virtualenv }}"
+
+- name: Install configurable-http-proxy with npm
+  npm:
+    name: configurable-http-proxy
+    global: yes

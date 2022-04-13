@@ -1,0 +1,19 @@
+---
+
+- name: Create systemd directory for jupyterhub
+  file:
+    path: "{{ jupyterhub_systemd_dir }}"
+    state: directory
+
+- name: Write jupyterhub unit file
+  template:
+    dest: "{{ jupyterhub_systemd_file }}"
+    src: jupyterhub.service.j2
+
+- name: Create unit file symlink
+  file:
+    path: "{{ jupyterhub_systemd_link }}"
+    state: link
+    src: "{{ jupyterhub_systemd_file }}"
+  notify:
+    - Start jupyterhub

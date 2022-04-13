@@ -1,0 +1,25 @@
+---
+
+- name: Create jupyterhub configuration directory
+  file:
+    path: "{{ jupyterhub_config_dir }}"
+    state: directory
+
+- name: Produce default configuration file
+  shell:
+    cmd: "{{ jupyterhub_virtualenv }}/bin/jupyterhub --generate-config -f {{ jupyterhub_config_file }}"
+    creates: "{{ jupyterhub_config_file }}"
+
+- name: Edit the configuration file to make JupyterLab interface the default
+  lineinfile:
+    path: "{{ jupyterhub_config_file }}"
+    regexp: ^c\.Spawner\.default_url = .*$
+    line: c.Spawner.default_url = '/lab'
+    state: present
+
+- name: Edit the configuration file to make JupyterHub work with nginx
+  lineinfile:
+    path: "{{ jupyterhub_config_file }}"
+    regexp: ^c\.JupyterHub\.bind_url = .*$
+    line: c.JupyterHub.bind_url = 'http://:8000{{ jupyterhub_relative_url }}'
+    state: present

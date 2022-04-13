@@ -1,0 +1,19 @@
+---
+
+- name: Install dependencies
+  include_tasks: dependencies.yml
+
+- name: Configure JupyterHub
+  include_tasks: configuration.yml
+
+- name: Create JupyterHub user
+  include_tasks: jupyterhub_user.yml
+
+- name: Create JupyterHub service
+  include_tasks: systemd.yml
+
+- name: Install and configure conda
+  include_tasks: conda.yml
+
+- name: Install and configure nginx
+  include_tasks: nginx.yml

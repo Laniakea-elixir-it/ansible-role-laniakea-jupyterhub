@@ -1,0 +1,31 @@
+server {
+    # Listen on port 80
+    listen       *:80;
+    # Match all requests for the interactive tools subdomain
+    server_name  {{ inventory_hostname }};
+
+    # Our log files will go here.
+    access_log  /var/log/nginx/jupyterhub-access.log;
+    error_log   /var/log/nginx/jupyterhub-error.log;
+
+    # Proxy all requests to the GIE Proxy application
+    location {{ jupyterhub_relative_url }} {
+      # NOTE important to also set base url of jupyterhub to /jupyter in its config
+      proxy_pass http://127.0.0.1:8000;
+
+      proxy_redirect   off;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+
+      # websocket headers
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+
+    }
+}
+
+
+
+    

@@ -1,0 +1,45 @@
+---
+
+jupyterhub_username: jupyterhub
+
+# Dependencies variables
+wheel_version: 0.37.1
+jupyterhub_version: 2.2.2
+jupyterlab_version: 3.3.3
+notebook_version: 6.4.10
+markupsafe_version: 2.0.1
+ipywidgets_version: 7.7.0
+
+# Jupyterhub configuration variables
+jupyterhub_virtualenv: /opt/jupyterhub
+jupyterhub_virtualenv_bin: "{{ jupyterhub_virtualenv }}/bin"
+base_config_dir: "{{ jupyterhub_virtualenv }}/etc"
+jupyterhub_config_dir: "{{ base_config_dir }}/jupyterhub"
+jupyterhub_config_file: "{{ jupyterhub_config_dir }}/jupyterhub_config.py"
+
+# JupyterHub service variables
+jupyterhub_unit_name: jupyterhub.service
+jupyterhub_systemd_dir: "{{ base_config_dir }}/systemd"
+jupyterhub_systemd_file: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
+jupyterhub_systemd_link: "/etc/systemd/system/{{ jupyterhub_unit_name }}"
+
+# Conda variables
+conda_gpg_key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
+conda_repo: deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
+conda_dir: /opt/conda
+conda_script_source: "{{ conda_dir }}/etc/profile.d/conda.sh"
+conda_script_destination: /etc/profile.d/conda.sh
+conda_envs_dir: "{{ conda_dir }}/envs"
+default_conda_env_name: python
+default_conda_env_dir: "{{ conda_envs_dir }}/{{ default_conda_env_name }}"
+default_conda_env_packages:
+  - ipykernel
+python_version: 3.7
+
+# Nginx variables
+jupyterhub_relative_url: /jupyter
+nginx_conf_dir: /etc/nginx
+jupyterhub_nginx_sites_available: "{{ nginx_conf_dir }}/sites-available/jupyterhub"
+
+# Test variables
+role_debug: false
