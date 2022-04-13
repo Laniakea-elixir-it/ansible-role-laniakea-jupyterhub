@@ -18,9 +18,9 @@
 
 - name: Create conda file symlink
   file:
-    path: "{{ conda_script_destination }}"
+    path: "{{ conda_dir }}/{{ conda_script_path }}"
+    src: "{{ conda_script_path }}"
     state: link
-    src: "{{ conda_script_source }}"
 
 - name: Create conda envs directory
   file:
@@ -29,10 +29,7 @@
 
 - name: Create default conda env
   shell:
-    cmd: |
-      {{ conda_dir }}/bin/conda create -y
-      --prefix {{ default_conda_env_dir }}
-      python={{ python_version }} {{ default_conda_env_packages | join(' ') }}
+    cmd: "{{ conda_dir }}/bin/conda create -y --prefix {{ default_conda_env_dir }} python={{ python_version }} {{ default_conda_env_packages | join(' ') }}"
     creates: "{{ default_conda_env_dir }}"
 
 - name: Install IPython kernel into Jupyterhub virtualenv

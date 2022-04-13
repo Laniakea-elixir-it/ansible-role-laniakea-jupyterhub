@@ -7,14 +7,14 @@
 
 - name: Configure reverse proxy for JupyterHub
   template:
-    dest: "{{ jupyterhub_nginx_sites_available }}"
+    dest: "{{ nginx_conf_dir }}/sites-available/{{ jupyterhub_nginx_site_file }}"
     src: jupyterhub_nginx.j2
   notify: Restart nginx
 
 - name: Enable JupyterHub in nginx
   file:
-    src: "{{jupyterhub_nginx_sites_available }}"
-    dest: "{{ nginx_conf_dir }}/sites-enabled/jupyterhub"
+    src: "{{ nginx_conf_dir }}/sites-available/{{ jupyterhub_nginx_site_file }}"
+    dest: "{{ nginx_conf_dir }}/sites-enabled/{{ jupyterhub_nginx_site_file }}"
     state: link
   notify: Restart nginx
     
