@@ -17,15 +17,4 @@
     dest: "{{ nginx_conf_dir }}/sites-enabled/jupyterhub"
     state: link
   notify: Restart nginx
-
-- name: Configure nginx
-  blockinfile:
-    path: "{{ nginx_conf_dir }}/sites-available/default"
-    block: |2
-              map $http_upgrade $connection_upgrade {
-                default upgrade;
-                '' close;
-              }
-    insertbefore: ^server {
-  notify: Restart nginx
     
