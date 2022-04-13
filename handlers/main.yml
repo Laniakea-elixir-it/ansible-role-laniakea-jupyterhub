@@ -1,10 +1,10 @@
 ---
 # handlers file for jupyterhub
 
-- name: Start jupyterhub
+- name: Restart jupyterhub
   systemd:
     name: "{{ jupyterhub_unit_name }}"
-    state: started
+    state: restarted
     enabled: yes
     daemon_reload: yes
 
