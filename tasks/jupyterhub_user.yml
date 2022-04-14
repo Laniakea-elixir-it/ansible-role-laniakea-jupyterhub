@@ -1,15 +1,8 @@
 ---
 
-- name: Copy password generator script
-  template:
-    src: pwd_generator.j2
-    dest: /opt/pwd_generator.py
-    mode: 0777
-
-- name: Create jupyterhub user random passwd
-  shell:
-    cmd: /opt/pwd_generator.py -l 8 -p
-  register: random_pwd
+- name: Create user random password
+  set_fact:
+    random_pwd: "{{ lookup('password', '/dev/null length=8') }}"
 
 - name: Print password
   debug: 
@@ -21,11 +14,11 @@
     name: "{{ jupyterhub_username }}"
     groups: sudo
     state: present
-    password: "{{ random_pwd.stdout | string |  password_hash('sha512') }}"
+    password: "{{ random_pwd |  password_hash('sha512') }}"
     update_password: on_create
 
 - name: Save password on file
   copy:
-    content: '{{ random_pwd.stdout}}'
+    content: "{{ random_pwd }}"
     dest: /home/{{ jupyterhub_username }}/pssw.txt
     force: no
