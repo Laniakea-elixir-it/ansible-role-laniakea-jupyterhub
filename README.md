@@ -3,7 +3,7 @@ Laniakea JupyterHub
 
 This role installs and configure JupyterHub and JupyterHub, creating a new user with a random password to access
 and use JupyterHub.\
-This role follows the [JupyterHub and JupyterLab installation guide](https://jupyterhub.readthedocs.io/en/1.2.0/installation-guide-hard.html).
+This role follows the [JupyterHub and JupyterLab installation guide](https://github.com/jupyterhub/jupyterhub-the-hard-way/blob/HEAD/docs/installation-guide-hard.md).
 
 It has been tested on Ubuntu 20.04
 
