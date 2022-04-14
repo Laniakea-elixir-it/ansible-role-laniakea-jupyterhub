@@ -43,7 +43,7 @@ Role Variables
 | conda_dir                  | Path where conda is installed with apt                      | /opt/conda                                                                     |
 | conda_script_path          | Path were conda script is linked to be available to users   | /etc/profile.d/conda.sh                                                        |
 | conda_envs_dir             | Path were conda environments are installed                  | {{ conda_dir }}/envs                                                           |
-| default_conda_env_name     | Name of the default conda env for JupyterHub                | python                                                                         |
+| default_conda_env_name     | Name of the default conda env for JupyterHub                | default                                                                        |
 | default_conda_env_dir      | Path to the default conda env                               | {{ conda_envs_dir }}/{{ default_conda_env_name }}                              |
 | default_conda_env_packages | Packages installed in the conda env (ipykernel is required) | [ipykernel]                                                                    |
 | python_version             | Python version used for the default conda env               | 3.7                                                                            |

@@ -28,7 +28,7 @@ conda_repo: deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda s
 conda_dir: /opt/conda
 conda_script_path: /etc/profile.d/conda.sh
 conda_envs_dir: "{{ conda_dir }}/envs"
-default_conda_env_name: python
+default_conda_env_name: default
 default_conda_env_dir: "{{ conda_envs_dir }}/{{ default_conda_env_name }}"
 default_conda_env_packages:
   - ipykernel
