@@ -7,7 +7,7 @@
 
 - name: Write jupyterhub unit file
   template:
-    dest: "{{ jupyterhub_systemd_file }}"
+    dest: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
     src: jupyterhub.service.j2
   notify:
     - Restart jupyterhub
@@ -15,7 +15,7 @@
 - name: Create unit file symlink
   file:
     path: "/etc/systemd/system/{{ jupyterhub_unit_name }}"
-    src: "{{ jupyterhub_systemd_file }}"
+    src: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
     state: link
   notify:
     - Restart jupyterhub

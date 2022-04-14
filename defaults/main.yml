@@ -13,14 +13,12 @@ ipywidgets_version: 7.7.0
 # Jupyterhub configuration variables
 jupyterhub_virtualenv: /opt/jupyterhub
 jupyterhub_virtualenv_bin: "{{ jupyterhub_virtualenv }}/bin"
-base_config_dir: "{{ jupyterhub_virtualenv }}/etc"
-jupyterhub_config_dir: "{{ base_config_dir }}/jupyterhub"
+jupyterhub_config_dir: "{{ jupyterhub_virtualenv }}/etc/jupyterhub"
 jupyterhub_config_file: "{{ jupyterhub_config_dir }}/jupyterhub_config.py"
 
 # JupyterHub service variables
 jupyterhub_unit_name: jupyterhub.service
-jupyterhub_systemd_dir: "{{ base_config_dir }}/systemd"
-jupyterhub_systemd_file: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
+jupyterhub_systemd_dir: "{{ jupyterhub_virtualenv }}/etc/systemd"
 
 # Conda variables
 conda_gpg_key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
