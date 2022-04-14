@@ -2,7 +2,7 @@ galaxy_info:
   author: Daniele Colombo
   description: Install and configure JupyterHub and JupyterLab
   license: Apache-2.0
-  role_name: laniakea-jupyterhub
+  role_name: jupyterhub
   min_ansible_version: 2.9
   platforms:
    - name: Ubuntu
