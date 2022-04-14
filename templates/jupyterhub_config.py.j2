@@ -1,3 +1,3 @@
 c.Spawner.default_url = '/lab'
-c.JupyterHub.bind_url = 'http://127.0.0.1:8000/jupyter'
+c.JupyterHub.bind_url = 'http://127.0.0.1:8000{{ jupyterhub_relative_url }}'
 c.Authenticator.admin_users = { {{ admin_users | map('to_json') | join(', ') }} }
