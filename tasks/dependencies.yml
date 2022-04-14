@@ -1,6 +1,6 @@
 ---
 
-- name: Install prerequisites
+- name: Install dependencies
   apt:
     name:
       - nodejs
@@ -10,7 +10,7 @@
     state: present
     update_cache: yes
 
-- name: Install jupyterlab and jupyterhub using pip
+- name: Create python virtualenv with required dependencies
   pip:
     name: 
       - wheel=={{ wheel_version }}
