@@ -15,6 +15,8 @@ jupyterhub_virtualenv: /opt/jupyterhub
 jupyterhub_virtualenv_bin: "{{ jupyterhub_virtualenv }}/bin"
 jupyterhub_config_dir: "{{ jupyterhub_virtualenv }}/etc/jupyterhub"
 jupyterhub_config_file: "{{ jupyterhub_config_dir }}/jupyterhub_config.py"
+admin_users:
+  - "{{ jupyterhub_username }}"
 
 # JupyterHub service variables
 jupyterhub_unit_name: jupyterhub.service
