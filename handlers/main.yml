@@ -1,12 +1,15 @@
 ---
 # handlers file for jupyterhub
 
+- name: Systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+
 - name: Restart jupyterhub
   systemd:
     name: "{{ jupyterhub_unit_name }}"
     state: restarted
     enabled: yes
-    daemon_reload: yes
 
 - name: Restart nginx
   service:

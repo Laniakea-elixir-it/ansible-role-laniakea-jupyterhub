@@ -10,6 +10,7 @@
     dest: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
     src: jupyterhub.service.j2
   notify:
+    - Systemd daemon-reload
     - Restart jupyterhub
 
 - name: Create unit file symlink
@@ -18,4 +19,5 @@
     src: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
     state: link
   notify:
+    - Systemd daemon-reload
     - Restart jupyterhub
