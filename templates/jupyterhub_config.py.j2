@@ -1,3 +1,24 @@
+import os, shutil
+
+# Set spawned jupyterhub working directory outside of home
+# https://github.com/jupyterhub/jupyterhub/issues/314
+from jupyterhub.spawner import LocalProcessSpawner
+class MySpawner(LocalProcessSpawner):
+    def _notebook_dir_default(self):
+        return f'{{ notebooks_dir }}/{self.user.name}'
+
+c.JupyterHub.spawner_class = MySpawner
+
+# Automatically create user new default working directory if it doesn't exist
+def userdata_hook(spawner, auth_state):
+    username = spawner.user.name
+    new_user_home = f'{{ notebooks_dir }}/{username}'
+    if not os.path.exists(new_user_home):
+        os.makedirs(new_user_home, mode=0o755)
+        shutil.chown(new_user_home, username, username)
+
+c.Spawner.auth_state_hook = userdata_hook
+
 c.Spawner.default_url = '/lab'
 c.JupyterHub.bind_url = 'http://127.0.0.1:8000{{ jupyterhub_relative_url }}'
 c.Authenticator.admin_users = { {{ admin_users | map('to_json') | join(', ') }} }
