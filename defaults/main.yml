@@ -1,4 +1,5 @@
 ---
+export_dir: /export
 
 jupyterhub_username: jupyterhub
 
@@ -11,7 +12,7 @@ markupsafe_version: 2.0.1
 ipywidgets_version: 7.7.0
 
 # Jupyterhub configuration variables
-jupyterhub_virtualenv: /opt/jupyterhub
+jupyterhub_virtualenv: "{{ export_dir }}/jupyterhub"
 jupyterhub_virtualenv_bin: "{{ jupyterhub_virtualenv }}/bin"
 jupyterhub_config_dir: "{{ jupyterhub_virtualenv }}/etc/jupyterhub"
 jupyterhub_config_file: "{{ jupyterhub_config_dir }}/jupyterhub_config.py"
@@ -25,7 +26,7 @@ jupyterhub_systemd_dir: "{{ jupyterhub_virtualenv }}/etc/systemd"
 # Conda variables
 conda_gpg_key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
 conda_repo: deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
-conda_dir: /opt/conda
+conda_dir: "{{ export_dir }}/conda"
 conda_script_path: /etc/profile.d/conda.sh
 conda_envs_dir: "{{ conda_dir }}/envs"
 default_conda_env_name: default
