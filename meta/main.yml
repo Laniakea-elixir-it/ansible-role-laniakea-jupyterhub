@@ -8,3 +8,10 @@ galaxy_info:
    - name: Ubuntu
      versions:
         - focal
+  galaxy_tags:
+    - jupyterhub
+    - laniakea
+
+dependencies:
+  - role: mtangaro.vault_secrets
+    when: retrieve_passphrase_from_vault

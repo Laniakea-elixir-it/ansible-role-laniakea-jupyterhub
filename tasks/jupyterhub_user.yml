@@ -1,24 +1,35 @@
 ---
 
-- name: Create user random password
+- name: Create jupyterhub user random password
   set_fact:
-    random_pwd: "{{ lookup('password', '/dev/null length=8') }}"
+    jupyterhub_admin_password: "{{ lookup('password', '/dev/null length=8') }}"
+  no_log: True
+  when: not retrieve_passphrase_from_vault
 
-- name: Print password
-  debug: 
-    var: random_pwd
-  when: role_debug|bool == true
-
-- name: Create jupyterhub user and set jupyterhub password
+- name: Create JupyterHub user and set jupyterhub password
   user: 
     name: "{{ jupyterhub_username }}"
     groups: sudo
     state: present
-    password: "{{ random_pwd |  password_hash('sha512') }}"
+    password: "{{ jupyterhub_admin_password | string | password_hash('sha512') }}"
     update_password: on_create
+  no_log: True
+  when: not retrieve_passphrase_from_vault
 
 - name: Save password on file
   copy:
-    content: "{{ random_pwd }}"
+    content: "{{ jupyterhub_admin_password }}"
     dest: /home/{{ jupyterhub_username }}/pssw.txt
-    force: no
+  become: yes
+  become_user: "{{ jupyterhub_username }}"
+  no_log: True
+  when: not retrieve_passphrase_from_vault
+
+- name: Create JupyterHub user and set rstudio password from Vault
+  user:
+    name: "{{ jupyterhub_admin_password }}"
+    state: present
+    password: "{{ vault_secrets.data.admin_password | string | password_hash('sha512') }}"
+    update_password: on_create
+  no_log: True
+  when: retrieve_passphrase_from_vault
