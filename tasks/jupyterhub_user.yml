@@ -27,7 +27,7 @@
 
 - name: Create JupyterHub user and set rstudio password from Vault
   user:
-    name: "{{ jupyterhub_admin_password }}"
+    name: "{{ jupyterhub_username }}"
     state: present
     password: "{{ vault_secrets.data.admin_password | string | password_hash('sha512') }}"
     update_password: on_create
