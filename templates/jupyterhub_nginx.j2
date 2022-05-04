@@ -5,8 +5,9 @@ map $http_upgrade $connection_upgrade {
 
 server {
     # Listen on port 80
-    listen       *:80;
-    server_name  {{ inventory_hostname }};
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
 
     # Our log files will go here.
     access_log  /var/log/nginx/jupyterhub-access.log;
