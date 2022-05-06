@@ -20,8 +20,9 @@
   copy:
     content: "{{ jupyterhub_admin_password }}"
     dest: /home/{{ jupyterhub_username }}/pssw.txt
-  become: yes
-  become_user: "{{ jupyterhub_username }}"
+    force: no
+    owner: "{{ jupyterhub_username }}"
+    group: "{{ jupyterhub_username }}"
   no_log: True
   when: not retrieve_passphrase_from_vault
 

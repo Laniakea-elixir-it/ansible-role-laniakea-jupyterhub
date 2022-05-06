@@ -4,9 +4,13 @@
   file:
     path: "{{ jupyterhub_config_dir }}"
     state: directory
+    owner: "{{ jupyterhub_username }}"
+    group: "{{ jupyterhub_username }}"
 
 - name: Template JupyterHub configuration file
   template:
     dest: "{{ jupyterhub_config_file }}"
     src: jupyterhub_config.py.j2
+    owner: "{{ jupyterhub_username }}"
+    group: "{{ jupyterhub_username }}"
   notify: Restart jupyterhub

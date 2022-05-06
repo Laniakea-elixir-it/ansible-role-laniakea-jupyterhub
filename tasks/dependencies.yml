@@ -21,6 +21,14 @@
       - ipywidgets=={{ ipywidgets_version }}
     virtualenv: "{{ jupyterhub_virtualenv }}"
 
+- name: Set permissions for python virtualenv
+  file:
+    path: "{{ jupyterhub_virtualenv }}"
+    state: directory
+    recurse: yes
+    owner: "{{ jupyterhub_username }}"
+    group: "{{ jupyterhub_username }}"
+
 - name: Install configurable-http-proxy with npm
   npm:
     name: configurable-http-proxy
