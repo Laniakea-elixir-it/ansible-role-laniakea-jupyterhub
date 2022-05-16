@@ -45,3 +45,5 @@ jupyterhub_nginx_site_file: jupyterhub
 role_debug: false
 
 retrieve_passphrase_from_vault: false
+
+prepare_express: false

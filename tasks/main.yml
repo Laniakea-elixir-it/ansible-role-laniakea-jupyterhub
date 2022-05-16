@@ -17,3 +17,7 @@
 
 - name: Install and configure nginx
   include_tasks: nginx.yml
+
+- name: Prepare for JupyterHub express image
+  include_tasks: prepare_express.yml
+  when: prepare_express

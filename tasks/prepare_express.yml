@@ -1,0 +1,12 @@
+---
+
+- name: Backup export_dir
+  archive:
+    path: "{{ export_dir }}"
+    dest: /opt/export_dir.tar.gz
+
+- name: Remove export_dir
+  file:
+    path: "{{ export_dir }}"
+    state: absent
+  
