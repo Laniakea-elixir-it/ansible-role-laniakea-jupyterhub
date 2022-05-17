@@ -20,10 +20,6 @@ admin_users:
   - "{{ jupyterhub_username }}"
 notebooks_dir: "{{export_dir }}/notebooks"
 
-# JupyterHub service variables
-jupyterhub_unit_name: jupyterhub.service
-jupyterhub_systemd_dir: "{{ jupyterhub_virtualenv }}/etc/systemd"
-
 # Conda variables
 conda_gpg_key_url: https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc
 conda_repo: deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main

@@ -7,7 +7,7 @@
 
 - name: Restart jupyterhub
   systemd:
-    name: "{{ jupyterhub_unit_name }}"
+    name: jupyterhub.service
     state: restarted
     enabled: yes
 

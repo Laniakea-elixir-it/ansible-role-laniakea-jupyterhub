@@ -1,23 +1,9 @@
 ---
 
-- name: Create systemd directory for jupyterhub
-  file:
-    path: "{{ jupyterhub_systemd_dir }}"
-    state: directory
-
 - name: Write jupyterhub unit file
   template:
-    dest: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
+    dest: /etc/systemd/system/jupyterhub.service
     src: jupyterhub.service.j2
-  notify:
-    - Systemd daemon-reload
-    - Restart jupyterhub
-
-- name: Create unit file symlink
-  file:
-    path: "/etc/systemd/system/{{ jupyterhub_unit_name }}"
-    src: "{{ jupyterhub_systemd_dir }}/{{ jupyterhub_unit_name }}"
-    state: link
   notify:
     - Systemd daemon-reload
     - Restart jupyterhub

@@ -30,8 +30,6 @@ Role Variables
 | jupyterhub_virtualenv_bin | JupyterHub virtualenv bin directory                | {{ jupyterhub_virtualenv }}/bin                  |
 | jupyterhub_config_dir     | Directory containing JupyterHub configuration file | {{ jupyterhub_virtualenv }}/etc/jupyterhub       |
 | jupyterhub_config_file    | Path to JupyterHub configuration file              | {{ jupyterhub_config_dir }}/jupyterhub_config.py |
-| jupyterhub_unit_name      | Name for jupyterhub unit file                      | jupyterhub.service                               |
-| jupyterhub_systemd_dir    | Path to directory containig JupyterHub unit file   | {{ jupyterhub_virtualenv }}/etc/systemd          |
 | jupyterhub_relative_url   | URL where JupyterHub is accessible                 | /jupyter                                         |
 | role_debug                | If true, the JupyterHub user password is printed   | false                                            |
 
