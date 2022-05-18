@@ -2,7 +2,7 @@
 
 - name: Create jupyterhub user random password
   set_fact:
-    jupyterhub_admin_password: "{{ lookup('password', '/dev/null length=8') }}"
+    jupyterhub_admin_password: "{{ lookup('password', '/dev/null length=20') }}"
   no_log: True
   when: not retrieve_passphrase_from_vault
 
@@ -26,7 +26,7 @@
   no_log: True
   when: not retrieve_passphrase_from_vault
 
-- name: Create JupyterHub user and set rstudio password from Vault
+- name: Create JupyterHub user and set jupyterhub user password from Vault
   user:
     name: "{{ jupyterhub_username }}"
     state: present
