@@ -2,6 +2,7 @@
 export_dir: /export
 
 jupyterhub_username: jupyterhub
+jupyterhub_password: changeit
 
 # Dependencies variables
 wheel_version: 0.37.1
@@ -39,5 +40,3 @@ jupyterhub_nginx_site_file: jupyterhub
 
 # Test variables
 role_debug: false
-
-retrieve_passphrase_from_vault: false
