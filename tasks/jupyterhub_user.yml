@@ -13,11 +13,11 @@
 - name: Create JupyterHub user and set jupyterhub password
   user: 
     name: "{{ jupyterhub_username }}"
-    groups: sudo
+    groups: sudo # sudo is the group on ubuntu. on rocky it is wheel
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
-      #no_log: True
+  no_log: True
 
 - name: Save password on file
   copy:
