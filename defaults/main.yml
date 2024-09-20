@@ -2,7 +2,7 @@
 export_dir: /export
 
 jupyterhub_username: jupyterhub
-jupyterhub_password: changeit
+jupyterhub_password: random
 
 # Dependencies variables
 wheel_version: 0.37.1
