@@ -12,7 +12,7 @@
 - name: Alternatively create user random password.
   set_fact:
     __password__: "{{ lookup('password', '/dev/null length=20') }}"
-  no_log: True
+  #no_log: True
   when: jupyterhub_password is defined and jupyterhub_password == 'random'
 
 - name: Create JupyterHub user and set jupyterhub password
