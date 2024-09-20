@@ -1,4 +1,8 @@
 ---
+
+- debug:
+    msg: '{{ jupyterhub_password }}'
+
 - name: Get user password extenrally (e.g. from Vault) if available
   set_fact:
     __password__: '{{ jupyterhub_password }}'
