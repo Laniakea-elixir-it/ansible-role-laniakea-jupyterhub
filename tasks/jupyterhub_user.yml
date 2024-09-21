@@ -22,7 +22,7 @@
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
-  no_log: True
+  #no_log: True
 
 - name: Save password on file
   copy:
@@ -31,5 +31,5 @@
     force: no
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
-  no_log: True
+  #no_log: True
   when: jupyterhub_password == 'random'
