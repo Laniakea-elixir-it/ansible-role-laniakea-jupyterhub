@@ -32,4 +32,4 @@
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
   #no_log: True
-  when: jupyterhub_password == 'random'
+  #when: jupyterhub_password == 'random'
