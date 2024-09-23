@@ -1,8 +1,5 @@
 ---
 
-- debug:
-    msg: '{{ jupyterhub_password }}'
-
 - name: Get user password extenrally (e.g. from Vault) if available
   set_fact:
     __password__: '{{ jupyterhub_password }}'
@@ -12,7 +9,7 @@
 - name: Alternatively create user random password.
   set_fact:
     __password__: "{{ lookup('password', '/dev/null length=20') }}"
-  #no_log: True
+  no_log: True
   when: jupyterhub_password is defined and jupyterhub_password == 'random'
 
 - name: Create JupyterHub user and set jupyterhub password
@@ -22,7 +19,7 @@
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
-  #no_log: True
+  no_log: True
 
 - name: Save password on file
   copy:
@@ -31,5 +28,5 @@
     force: no
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
-  #no_log: True
-  #when: jupyterhub_password == 'random'
+  no_log: True
+  when: jupyterhub_password == 'random'
