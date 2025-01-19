@@ -12,7 +12,7 @@
 
 - name: Create python virtualenv with required dependencies
   pip:
-    name: 
+    name:
       - wheel=={{ wheel_version }}
       - jupyterlab=={{jupyterlab_version}}
       - jupyterhub=={{ jupyterhub_version }}

@@ -13,7 +13,7 @@
   when: jupyterhub_password is defined and jupyterhub_password == 'random'
 
 - name: Create JupyterHub user and set jupyterhub password
-  user: 
+  user:
     name: "{{ jupyterhub_username }}"
     groups: sudo # sudo is the group on ubuntu. on rocky it is wheel
     state: present

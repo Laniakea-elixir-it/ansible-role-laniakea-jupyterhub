@@ -22,4 +22,4 @@
     src: "{{ nginx_conf_dir }}/sites-available/{{ jupyterhub_nginx_site_file }}"
     dest: "{{ nginx_conf_dir }}/sites-enabled/{{ jupyterhub_nginx_site_file }}"
     state: link
-  notify: Restart nginx    
+  notify: Restart nginx
