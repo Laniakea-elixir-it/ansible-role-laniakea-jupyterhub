@@ -1,35 +1,37 @@
 ---
 
 - name: Install dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - nodejs
       - npm
       - python3-pip
       - python3-virtualenv
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Create python virtualenv with required dependencies
-  pip:
+  ansible.builtin.pip:
     name:
       - wheel=={{ wheel_version }}
-      - jupyterlab=={{jupyterlab_version}}
+      - jupyterlab=={{ jupyterlab_version }}
       - jupyterhub=={{ jupyterhub_version }}
       - notebook=={{ notebook_version }}
-      - markupsafe=={{ markupsafe_version }} # https://techoverflow.net/2022/04/07/how-to-fix-jupyter-lab-importerror-cannot-import-name-soft_unicode-from-markupsafe/
+      # https://techoverflow.net/2022/04/07/how-to-fix-jupyter-lab-importerror-cannot-import-name-soft_unicode-from-markupsafe/
+      - markupsafe=={{ markupsafe_version }}
       - ipywidgets=={{ ipywidgets_version }}
     virtualenv: "{{ jupyterhub_virtualenv }}"
 
 - name: Set permissions for python virtualenv
-  file:
+  ansible.builtin.file:
     path: "{{ jupyterhub_virtualenv }}"
     state: directory
-    recurse: yes
+    mode: '0755'
+    recurse: true
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
 
 - name: Install configurable-http-proxy with npm
-  npm:
+  community.general.npm:
     name: configurable-http-proxy
-    global: yes
+    global: true

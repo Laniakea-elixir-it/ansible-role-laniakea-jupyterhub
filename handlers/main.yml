@@ -2,16 +2,16 @@
 # handlers file for jupyterhub
 
 - name: Systemd daemon-reload
-  systemd:
-    daemon_reload: yes
+  ansible.builtin.systemd:
+    daemon_reload: true
 
 - name: Restart jupyterhub
-  systemd:
+  ansible.builtin.systemd:
     name: jupyterhub.service
     state: restarted
-    enabled: yes
+    enabled: true
 
 - name: Restart nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     state: restarted

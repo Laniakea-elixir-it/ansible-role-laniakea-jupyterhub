@@ -1,9 +1,10 @@
 ---
 
 - name: Write jupyterhub unit file
-  template:
+  ansible.builtin.template:
     dest: /etc/systemd/system/jupyterhub.service
     src: jupyterhub.service.j2
+    mode: '0644'
   notify:
     - Systemd daemon-reload
     - Restart jupyterhub
