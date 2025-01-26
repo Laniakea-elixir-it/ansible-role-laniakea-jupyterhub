@@ -36,8 +36,8 @@
 
 - name: Install IPython kernel into Jupyterhub virtualenv
   ansible.builtin.command:
-    cmd: |
-      {{ default_conda_env_dir }}/bin/python -m ipykernel install \
-        --prefix={{ jupyterhub_virtualenv }} --name={{ default_conda_env_name }} \
+    cmd: >
+      {{ default_conda_env_dir }}/bin/python -m ipykernel install
+        --prefix={{ jupyterhub_virtualenv }} --name={{ default_conda_env_name }}
         --display-name={{ default_conda_env_name }}
     creates: "{{ jupyterhub_virtualenv }}/share/jupyter/kernels/python"
