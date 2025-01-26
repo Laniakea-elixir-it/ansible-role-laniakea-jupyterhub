@@ -4,14 +4,20 @@
 - name: Systemd daemon-reload
   systemd:
     daemon_reload: yes
+  when:
+    - not is_container|bool
 
 - name: Restart jupyterhub
   systemd:
     name: jupyterhub.service
     state: restarted
     enabled: yes
+  when:
+    - not is_container|bool
 
 - name: Restart nginx
   service:
     name: nginx
     state: restarted
+  when:
+    - not is_container|bool
