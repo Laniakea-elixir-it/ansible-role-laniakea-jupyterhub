@@ -40,3 +40,4 @@ jupyterhub_nginx_site_file: jupyterhub
 
 # Test variables
 role_debug: false
+is_container: false
