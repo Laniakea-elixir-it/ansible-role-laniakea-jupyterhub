@@ -7,6 +7,7 @@
       - npm
       - python3-pip
       - python3-virtualenv
+      - systemd
     state: present
     update_cache: yes
 
