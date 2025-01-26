@@ -53,7 +53,7 @@
     - name: Validate executable is present
       ansible.builtin.assert:
         that:
-          - bin1.stat.exists and bin1.stat.size != 0 and bin1.stat.mode == '4750'
+          - bin1.stat.exists and bin1.stat.size != 0 and bin1.stat.mode == '0755'
 
     - name: Ensure processes are running
       ansible.builtin.command:
