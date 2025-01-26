@@ -111,6 +111,8 @@ jobs:
           sudo ls -l /export /export/jupyterhub/
           sudo ls -l /export/jupyterhub/bin/
           sudo ls -l /export/jupyterhub/etc/
+          sudo ls -l /export/jupyterhub/etc/jupyterhub
+          sudo cat /export/jupyterhub/etc/jupyterhub/jupyterhub_config.py
         if: ${{ always() }}
         continue-on-error: true
       - name: After script - python
