@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: jupyterhub
   author: Daniele Colombo
   description: Install and configure JupyterHub and JupyterLab
   license: Apache-2.0
