@@ -1,25 +1,27 @@
 ---
 
 - name: Install nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
 
 - name: Disable default configuration
-  file:
+  ansible.builtin.file:
     path: "{{ nginx_conf_dir }}/sites-enabled/default"
     state: absent
   notify: Restart nginx
 
 - name: Configure reverse proxy for JupyterHub
-  template:
+  ansible.builtin.template:
     dest: "{{ nginx_conf_dir }}/sites-available/{{ jupyterhub_nginx_site_file }}"
     src: jupyterhub_nginx.j2
+    mode: '0644'
   notify: Restart nginx
 
 - name: Enable JupyterHub in nginx
-  file:
+  ansible.builtin.file:
     src: "{{ nginx_conf_dir }}/sites-available/{{ jupyterhub_nginx_site_file }}"
     dest: "{{ nginx_conf_dir }}/sites-enabled/{{ jupyterhub_nginx_site_file }}"
     state: link
-  notify: Restart nginx    
+    mode: '0644'
+  notify: Restart nginx

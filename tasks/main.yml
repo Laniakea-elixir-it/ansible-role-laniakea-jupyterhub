@@ -1,19 +1,19 @@
 ---
 
 - name: Create JupyterHub user
-  include_tasks: jupyterhub_user.yml
+  ansible.builtin.include_tasks: jupyterhub_user.yml
 
 - name: Install dependencies
-  include_tasks: dependencies.yml
+  ansible.builtin.include_tasks: dependencies.yml
 
 - name: Configure JupyterHub
-  include_tasks: configuration.yml
+  ansible.builtin.include_tasks: configuration.yml
 
 - name: Create JupyterHub service
-  include_tasks: systemd.yml
+  ansible.builtin.include_tasks: systemd.yml
 
 - name: Install and configure conda
-  include_tasks: conda.yml
+  ansible.builtin.include_tasks: conda.yml
 
 - name: Install and configure nginx
-  include_tasks: nginx.yml
+  ansible.builtin.include_tasks: nginx.yml

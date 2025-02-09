@@ -1,16 +1,18 @@
 ---
 
 - name: Create jupyterhub configuration directory
-  file:
+  ansible.builtin.file:
     path: "{{ jupyterhub_config_dir }}"
     state: directory
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
+    mode: '0700'
 
 - name: Template JupyterHub configuration file
-  template:
+  ansible.builtin.template:
     dest: "{{ jupyterhub_config_file }}"
     src: jupyterhub_config.py.j2
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
+    mode: '0600'
   notify: Restart jupyterhub

@@ -1,38 +1,43 @@
 ---
 
 - name: Add conda gpg key
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ conda_gpg_key_url }}"
     state: present
 
 - name: Add conda repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ conda_repo }}"
     state: present
 
 - name: Install conda
-  apt:
+  ansible.builtin.apt:
     name: conda
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Create conda file symlink
-  file:
+  ansible.builtin.file:
     path: "{{ conda_script_path }}"
     src: "{{ conda_dir }}/{{ conda_script_path }}"
     state: link
+    mode: '0755'
 
 - name: Create conda envs directory
-  file:
+  ansible.builtin.file:
     path: "{{ conda_envs_dir }}"
     state: directory
+    mode: '0755'
 
 - name: Create default conda env
-  shell:
+  ansible.builtin.command:
     cmd: "{{ conda_dir }}/bin/conda create -y --prefix {{ default_conda_env_dir }} python={{ python_version }} {{ default_conda_env_packages | join(' ') }}"
     creates: "{{ default_conda_env_dir }}"
 
 - name: Install IPython kernel into Jupyterhub virtualenv
-  shell:
-    cmd: "{{ default_conda_env_dir }}/bin/python -m ipykernel install --prefix={{ jupyterhub_virtualenv }} --name={{ default_conda_env_name }} --display-name={{ default_conda_env_name }}"
+  ansible.builtin.command:
+    cmd: >
+      {{ default_conda_env_dir }}/bin/python -m ipykernel install
+        --prefix={{ jupyterhub_virtualenv }} --name={{ default_conda_env_name }}
+        --display-name={{ default_conda_env_name }}
     creates: "{{ jupyterhub_virtualenv }}/share/jupyter/kernels/python"

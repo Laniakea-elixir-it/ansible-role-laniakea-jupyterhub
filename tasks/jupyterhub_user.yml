@@ -1,32 +1,33 @@
 ---
 
 - name: Get user password extenrally (e.g. from Vault) if available
-  set_fact:
+  ansible.builtin.set_fact:
     __password__: '{{ jupyterhub_password }}'
-  no_log: True
+  no_log: true
   when: jupyterhub_password is defined
 
 - name: Alternatively create user random password.
-  set_fact:
+  ansible.builtin.set_fact:
     __password__: "{{ lookup('password', '/dev/null length=20') }}"
-  no_log: True
+  no_log: true
   when: jupyterhub_password is defined and jupyterhub_password == 'random'
 
 - name: Create JupyterHub user and set jupyterhub password
-  user: 
+  ansible.builtin.user:
     name: "{{ jupyterhub_username }}"
     groups: sudo # sudo is the group on ubuntu. on rocky it is wheel
     state: present
     password: "{{ __password__ | string | password_hash('sha512') }}"
     update_password: on_create
-  no_log: True
+  no_log: true
 
 - name: Save password on file
-  copy:
+  ansible.builtin.copy:
     content: "{{ __password__ }}"
     dest: /home/{{ jupyterhub_username }}/pssw.txt
-    force: no
+    force: false
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
-  no_log: True
+    mode: '0600'
+  no_log: true
   when: jupyterhub_password == 'random'
