@@ -95,9 +95,11 @@
       ansible.builtin.command:
         cmd: journalctl -u jupyterhub -g Error -l --no-pager
       changed_when: false
+      failed_when: false
       register: journald
       become: true
     - name: Ensure journald has no errors
       ansible.builtin.assert:
         that:
-          - journald.stdout | length == 0
+          - journald.stderr | length == 0
+          - journald.stdout == "-- No entries --"
