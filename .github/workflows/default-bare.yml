@@ -113,6 +113,7 @@ jobs:
           sudo ls -l /export/jupyterhub/etc/
           sudo ls -l /export/jupyterhub/etc/jupyterhub
           sudo cat /export/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+          sudo ls -l /home/jupyterhub/
         if: ${{ always() }}
         continue-on-error: true
       - name: After script - python
@@ -123,11 +124,22 @@ jobs:
           pip list --outdated
           pip install pip-audit
           pip-audit
+          jupyter troubleshoot
+        if: ${{ always() }}
+        continue-on-error: true
+      - name: After script - curl
+        run: |
+          set -x
+          curl -v http://localhost:8000 || true
+          curl -v http://localhost:8000/jupyter/hub || true
+          curl -v http://localhost || true
+          curl -v http://localhost/jupyter/hub || true
         if: ${{ always() }}
         continue-on-error: true
       - name: After script - journalctl
         run: |
           set -x
+          sudo journalctl -u jupyterhub -g Error -l --no-pager
           sudo journalctl -u jupyterhub -l --no-pager
         if: ${{ always() }}
         continue-on-error: true
