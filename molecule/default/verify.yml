@@ -90,3 +90,14 @@
       with_items: "{{ ports }}"
       when:
         - not is_container|bool
+
+    - name: Get journald errors
+      ansible.builtin.command:
+        cmd: journalctl -u jupyterhub -g Error -l --no-pager
+      changed_when: false
+      register: journald
+      become: true
+    - name: Ensure journald has no errors
+      ansible.builtin.assert:
+        that:
+          - journald.stdout | length == 0
