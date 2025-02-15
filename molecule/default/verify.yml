@@ -101,5 +101,5 @@
     - name: Ensure journald has no errors
       ansible.builtin.assert:
         that:
-          - journald.stderr | length == 0
+          - journald.stderr | length == 0 or journald.stderr == "No journal files were found."
           - journald.stdout == "-- No entries --"
