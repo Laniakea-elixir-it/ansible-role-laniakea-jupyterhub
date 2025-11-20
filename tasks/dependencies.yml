@@ -7,6 +7,7 @@
       - npm
       - python3-pip
       - python3-virtualenv
+      - node-configurable-http-proxy
     state: present
     update_cache: yes
 
@@ -29,7 +30,7 @@
     owner: "{{ jupyterhub_username }}"
     group: "{{ jupyterhub_username }}"
 
-- name: Install configurable-http-proxy with npm
-  npm:
-    name: configurable-http-proxy
-    global: yes
+      #- name: Install configurable-http-proxy with npm
+      #  npm:
+      #    name: configurable-http-proxy
+      #    global: yes
