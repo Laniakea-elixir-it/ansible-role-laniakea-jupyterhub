@@ -1,4 +1,7 @@
 ---
+- name: Sleep for 10 minutes for debugging
+  pause:
+    minutes: 10
 
 - name: Install dependencies
   apt:
