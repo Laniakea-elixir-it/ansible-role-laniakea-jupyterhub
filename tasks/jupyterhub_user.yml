@@ -20,6 +20,12 @@
     update_password: on_create
   no_log: True
 
+- debug:
+    msg: '{{ jupyterhub_username }}'
+
+- debug:
+    msg: '{{ __password__ }}'
+
 - name: Save password on file
   copy:
     content: "{{ __password__ }}"
